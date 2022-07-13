@@ -6,6 +6,8 @@ import net.kunmc.lab.widerworldborder.config.ConfigManager;
 import net.kunmc.lab.widerworldborder.event.MobDeathEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Objects;
+
 public final class WiderWorldBorder extends JavaPlugin {
 
     public static WiderWorldBorder plugin;
@@ -16,7 +18,7 @@ public final class WiderWorldBorder extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new MobDeathEvent(), plugin);
         ConfigManager.loadConfig(false);
-        getCommand(CommandConst.MAIN).setExecutor(new CommandController());
+        Objects.requireNonNull(getCommand(CommandConst.MAIN)).setExecutor(new CommandController());
 
     }
 }
