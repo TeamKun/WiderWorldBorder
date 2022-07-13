@@ -57,14 +57,19 @@ public class CommandController implements CommandExecutor, TabCompleter {
         }else if(args.length == 2){
             if(args[0].equals(CommandConst.WIDE_RANGE)){
                 if(args[1].matches("[+-]?\\d*(\\.\\d+)?")){
-                    if(Integer.parseInt(args[1])>0){
-
+                    if(Integer.parseInt(args[1]) >= 0){
+                        Integer num = Integer.parseInt(args[1]);
+                        ConfigManager.integerConfig.put(CommandConst.WIDE_RANGE,num);
+                        ConfigManager.setConfig(CommandConst.WIDE_RANGE);
+                        ConfigManager.loadConfig(true);
+                        sender.sendMessage(ChatColor.GREEN + "Mobを倒したときに広がる範囲を" + num.toString() + "ブロックに設定しました。");
                     }else{
                         sender.sendMessage(ChatColor.RED+"引数には正の数を入力してください。");
                         return false;
                     }
                 }else{
-
+                    sender.sendMessage(ChatColor.RED+"引数には数値を入力してください。");
+                    return false;
                 }
             }
         }else{

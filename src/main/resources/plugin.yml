@@ -2,3 +2,10 @@ name: WiderWorldBorder
 version: '${project.version}'
 main: net.kunmc.lab.widerworldborder.WiderWorldBorder
 api-version: 1.16
+authors: [ Yanaaaaa ]
+description: Mobを倒すとワールドボーダーが広がるプラグイン
+commands:
+  wwr:
+    description: WiderWorldBorder Plugin
+    usage: /<command>
+    permission: op

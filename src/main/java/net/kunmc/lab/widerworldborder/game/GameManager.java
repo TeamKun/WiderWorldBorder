@@ -1,6 +1,6 @@
 package net.kunmc.lab.widerworldborder.game;
 
-public class GameManager {
+public class GameManager{
     public static GameStatus runningMode = GameStatus.MODE_STOP;
 
     public enum GameStatus{

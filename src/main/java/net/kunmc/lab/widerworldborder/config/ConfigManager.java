@@ -27,7 +27,7 @@ public class ConfigManager {
         //configの取得
         config = WiderWorldBorder.plugin.getConfig();
 
-        //範囲 default:
+        //範囲 default:1
         String range = CommandConst.WIDE_RANGE;
         integerConfig.put(range, config.getInt(range));
     }
