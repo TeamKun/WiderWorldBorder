@@ -12,13 +12,19 @@ public final class WiderWorldBorder extends JavaPlugin {
 
     public static WiderWorldBorder plugin;
 
+    public static WiderWorldBorder getPlugin(){
+        return plugin;
+    }
+
     @Override
     public void onEnable() {
         plugin = this;
 
         getServer().getPluginManager().registerEvents(new MobDeathEvent(), plugin);
-        ConfigManager.loadConfig(false);
-        Objects.requireNonNull(getCommand(CommandConst.MAIN)).setExecutor(new CommandController());
 
+        ConfigManager.loadConfig(false);
+
+        getCommand(CommandConst.MAIN).setExecutor(new CommandController());
+        getCommand(CommandConst.MAIN).setTabCompleter(new CommandController());
     }
 }

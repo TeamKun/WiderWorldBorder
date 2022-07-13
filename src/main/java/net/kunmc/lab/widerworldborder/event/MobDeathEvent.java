@@ -37,11 +37,12 @@ public class MobDeathEvent implements Listener {
             if (!(mob.getHealth() - event.getDamage() > 0)) {
                 //ワールドボーダーを広げる処理
                 WorldBorder worldBorder = event.getDamager().getWorld().getWorldBorder();
+                ConfigManager.loadConfig(true);
                 Integer num = ConfigManager.integerConfig.get(CommandConst.WIDE_RANGE);
                 worldBorder.setSize(worldBorder.getSize() + num);
                 //全体に通知
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.sendMessage(ChatColor.AQUA + "ワールドボーダーのサイズが" + num + "ブロック増えました。");
+                    player.sendMessage(ChatColor.AQUA + "ワールドボーダーのサイズが" + num + "増えました。");
                 }
             }
         }

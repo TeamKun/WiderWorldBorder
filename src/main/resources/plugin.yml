@@ -5,7 +5,10 @@ api-version: 1.16
 authors: [ Yanaaaaa ]
 description: Mobを倒すとワールドボーダーが広がるプラグイン
 commands:
-  wwr:
+  wwb:
     description: WiderWorldBorder Plugin
-    usage: /<command>
-    permission: op
+    usage: コマンド一覧:/<command>
+    permission: WWB
+permissions:
+  WWB:
+    default: op

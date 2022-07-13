@@ -31,7 +31,14 @@ public class CommandController implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(args.length == 1){
+        if(args.length == 0){
+            sender.sendMessage(ChatColor.GREEN + "----------コマンド一覧----------");
+            sender.sendMessage("/wwb start : ゲームの開始");
+            sender.sendMessage("/wwb stop : ゲームの停止");
+            sender.sendMessage("/wwb widerRange : Mobを倒したときにワールドボーダーの広がる範囲の表示");
+            sender.sendMessage("/wwb widerRange <Number> : Mobを倒したときにワールドボーダーの広がる範囲の設定");
+            sender.sendMessage(ChatColor.GREEN + "----------コマンド一覧----------");
+        }else if(args.length == 1){
             if(args[0].equals(CommandConst.START)){
                 if(GameManager.isStop()){
                     GameManager.controller(GameManager.GameStatus.MODE_START);
@@ -41,7 +48,7 @@ public class CommandController implements CommandExecutor, TabCompleter {
                 }
             }else if(args[0].equals(CommandConst.STOP)){
                 if(GameManager.isRunning()){
-                    GameManager.controller(GameManager.GameStatus.MODE_START);
+                    GameManager.controller(GameManager.GameStatus.MODE_STOP);
                     sender.sendMessage(ChatColor.GREEN + "ゲームを停止しました。");
                 }else{
                     sender.sendMessage(ChatColor.RED + "ゲームはすでに停止されています。");
@@ -49,26 +56,27 @@ public class CommandController implements CommandExecutor, TabCompleter {
             }else if(args[0].equals(CommandConst.WIDE_RANGE)){
                 ConfigManager.loadConfig(true);
                 Integer num = ConfigManager.integerConfig.get(CommandConst.WIDE_RANGE);
-                sender.sendMessage(ChatColor.GREEN + "Mobを倒したときに広がる範囲は" + num.toString() + "ブロックに設定されています。");
+                sender.sendMessage(ChatColor.GREEN + "Mobを倒したときに広がるサイズは" + num + "に設定されています。");
             }else{
                 sender.sendMessage(ChatColor.RED + "コマンドの形式が異なります。");
                 return false;
             }
         }else if(args.length == 2){
             if(args[0].equals(CommandConst.WIDE_RANGE)){
-                if(args[1].matches("[+-]?\\d*(\\.\\d+)?")){
-                    if(Integer.parseInt(args[1]) >= 0){
-                        Integer num = Integer.parseInt(args[1]);
+                try{
+                    if(Integer.parseInt(args[1]) > 0){
+                        int num = Integer.parseInt(args[1]);
                         ConfigManager.integerConfig.put(CommandConst.WIDE_RANGE,num);
                         ConfigManager.setConfig(CommandConst.WIDE_RANGE);
                         ConfigManager.loadConfig(true);
-                        sender.sendMessage(ChatColor.GREEN + "Mobを倒したときに広がる範囲を" + num.toString() + "ブロックに設定しました。");
+                        sender.sendMessage(ChatColor.GREEN + "Mobを倒したときに広がるサイズを" + args[1] + "に設定しました。");
                     }else{
-                        sender.sendMessage(ChatColor.RED+"引数には正の数を入力してください。");
+                        sender.sendMessage(ChatColor.RED+"引数には自然数を入力してください。");
                         return false;
                     }
-                }else{
-                    sender.sendMessage(ChatColor.RED+"引数には数値を入力してください。");
+                }
+                catch (NumberFormatException ex){
+                    sender.sendMessage(ChatColor.RED+"引数には自然数を入力してください。");
                     return false;
                 }
             }
