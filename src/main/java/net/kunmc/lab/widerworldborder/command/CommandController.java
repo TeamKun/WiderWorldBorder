@@ -63,17 +63,17 @@ public class CommandController implements CommandExecutor, TabCompleter {
             }
         }else if(args.length == 2){
             if(args[0].equals(CommandConst.WIDE_RANGE)){
-                try{
-                    if(Integer.parseInt(args[1]) > 0){
+                    try{
+                        if(Integer.parseInt(args[1]) > 0){
                         int num = Integer.parseInt(args[1]);
-                        ConfigManager.integerConfig.put(CommandConst.WIDE_RANGE,num);
-                        ConfigManager.setConfig(CommandConst.WIDE_RANGE);
-                        ConfigManager.loadConfig(true);
-                        sender.sendMessage(ChatColor.GREEN + "Mobを倒したときに広がるサイズを" + args[1] + "に設定しました。");
-                    }else{
-                        sender.sendMessage(ChatColor.RED+"引数には自然数を入力してください。");
-                        return false;
-                    }
+                            ConfigManager.integerConfig.put(CommandConst.WIDE_RANGE,num);
+                            ConfigManager.setConfig(CommandConst.WIDE_RANGE);
+                            ConfigManager.loadConfig(true);
+                            sender.sendMessage(ChatColor.GREEN + "Mobを倒したときに広がるサイズを" + args[1] + "に設定しました。");
+                        }else{
+                            sender.sendMessage(ChatColor.RED+"引数には自然数を入力してください。");
+                            return false;
+                        }
                 }
                 catch (NumberFormatException ex){
                     sender.sendMessage(ChatColor.RED+"引数には自然数を入力してください。");
