@@ -17,7 +17,7 @@ public class MobDeathEvent implements Listener {
     @EventHandler
     public void onMobDeathEvent(EntityDamageByEntityEvent event) {
         //ゲーム
-        if(GameManager.isRunning()) {
+        if(GameManager.isRunning()){
             //攻撃を受ける側がLivingEntityでなければreturn
             if (!(event.getEntity() instanceof LivingEntity)) {
                 return;
