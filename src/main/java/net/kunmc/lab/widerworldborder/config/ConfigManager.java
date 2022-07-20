@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ConfigManager {
-    static FileConfiguration config;
+    public static FileConfiguration config;
 
     public static Map<String,Integer> integerConfig = new HashMap<>();
 
